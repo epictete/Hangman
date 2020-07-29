@@ -1,7 +1,8 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext('2d');
+// const canvas = document.getElementById("canvas");
+// const ctx = canvas.getContext('2d');
 const word = document.getElementById("word");
 const alphabet = document.getElementById("alphabet");
+const delay = 100;
 const words = [
     'ability',
     'inspector',
@@ -55,45 +56,58 @@ const words = [
     'mall'
 ];
 
-let raf;
+// let raf;
 let target;
-let index = [];
+let indexes = [];
 let score = 0;
 let tries = 6;
 let fails = 0;
+
 
 function checkLetter(i) {
     const letter = String.fromCharCode(i).toLocaleLowerCase();
     if (target.includes(letter)) {
         matchCount(letter);
-        score = score + index.length;
-        for (item of index) {
-            document.getElementById("word-" + item).innerHTML = letter;
-            index = [];
-        }
+        guessUpdate(letter);
         document.getElementById("letter-" + i).style.backgroundColor = 'green';
-        if (score === target.length) {
-            alert('You WIN!');
-        }
+        window.setTimeout(win, delay);
     } else {
         fails++;
         document.getElementById("letter-" + i).style.backgroundColor = 'red';
-        if (tries > 1) {
-            tries--;
-            console.log(tries);
-        } else {
-            alert('Game Over!');
-        }
+        window.setTimeout(gameOver, delay);
     }
+}
+
+function win() {
+    if (score === target.length) {
+        alert('You WIN!');
+        document.location.reload(true);
+    }
+}
+
+function gameOver() {
+    if (tries > 1) {
+        tries--;
+    } else {
+        alert('Game Over!');
+        document.location.reload(true);
+    }
+}
+
+function guessUpdate(letter) {
+    for (index of indexes) {
+        document.getElementById("word-" + index).innerHTML = letter;
+    }
+    indexes = [];
 }
 
 function matchCount(letter) {
     let pos = target.indexOf(letter);
-
     while (pos != -1) {
-        index.push(pos);
+        indexes.push(pos);
         pos = target.indexOf(letter, pos + 1);
     }
+    score = score + indexes.length;
 }
 
 function randWord() {
