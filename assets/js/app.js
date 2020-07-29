@@ -1,5 +1,7 @@
 // const canvas = document.getElementById("canvas");
 // const ctx = canvas.getContext('2d');
+// let raf;
+
 const word = document.getElementById("word");
 const alphabet = document.getElementById("alphabet");
 const delay = 100;
@@ -56,67 +58,66 @@ const words = [
     'mall'
 ];
 
-// let raf;
-let target;
-let indexes = [];
-let score = 0;
-let tries = 6;
-let fails = 0;
-
+var game = {
+    score: 0,
+    tries: 6,
+    fails: 0,
+    indexes: [],
+    target: ''
+}
 
 function checkLetter(i) {
     const letter = String.fromCharCode(i).toLocaleLowerCase();
-    if (target.includes(letter)) {
+    if (game.target.includes(letter)) {
         matchCount(letter);
         guessUpdate(letter);
         document.getElementById("letter-" + i).style.backgroundColor = 'green';
         window.setTimeout(win, delay);
     } else {
-        fails++;
+        game.fails++;
         document.getElementById("letter-" + i).style.backgroundColor = 'red';
         window.setTimeout(gameOver, delay);
     }
 }
 
 function win() {
-    if (score === target.length) {
+    if (game.score === game.target.length) {
         alert('You WIN!');
         document.location.reload(true);
     }
 }
 
 function gameOver() {
-    if (tries > 1) {
-        tries--;
+    if (game.tries > 1) {
+        game.tries--;
     } else {
-        alert('Game Over!');
+        alert('Game Over! The word was : "' + game.target + '"');
         document.location.reload(true);
     }
 }
 
 function guessUpdate(letter) {
-    for (index of indexes) {
+    for (index of game.indexes) {
         document.getElementById("word-" + index).innerHTML = letter;
     }
-    indexes = [];
+    game.indexes = [];
 }
 
 function matchCount(letter) {
-    let pos = target.indexOf(letter);
+    let pos = game.target.indexOf(letter);
     while (pos != -1) {
-        indexes.push(pos);
-        pos = target.indexOf(letter, pos + 1);
+        game.indexes.push(pos);
+        pos = game.target.indexOf(letter, pos + 1);
     }
-    score = score + indexes.length;
+    game.score = game.score + game.indexes.length;
 }
 
 function randWord() {
-    target = words[Math.floor(Math.random() * words.length)];
-    return target;
+    return game.target = words[Math.floor(Math.random() * words.length)];
 }
 
 function wordGen() {
-    for (let i = 0; i < target.length; i++) {
+    for (let i = 0; i < game.target.length; i++) {
         const newDiv = document.createElement('div');
         newDiv.setAttribute('id', 'word-' + i);
         word.appendChild(newDiv);
@@ -126,18 +127,18 @@ function wordGen() {
 function alphabetGen() {
     for (let i = 65; i <= 90; i++) {
         const newDiv = document.createElement('div');
+        const newContent = document.createTextNode(String.fromCharCode(i));
         newDiv.setAttribute('id', 'letter-' + i)
         newDiv.addEventListener("click", () => checkLetter(i));
-        const newContent = document.createTextNode(String.fromCharCode(i));
         newDiv.appendChild(newContent);
         alphabet.appendChild(newDiv);
     }
 }
 
-function hangman() {
+function hangMan() {
     randWord();
     wordGen();
     alphabetGen();
-    console.log(target);
+    console.log(game.target);
 }
-hangman();
+hangMan();

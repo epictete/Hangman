@@ -1,14 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 $width: 30px;
 $height: 30px;
 $margin: 5px;
 
 body{
-    width: 70%;
+    width: 75%;
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;
 }
 
 #canvas{
@@ -20,21 +23,28 @@ body{
     display: flex;
     margin: 10px;
     div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: $width;
         height: $height;
         margin: $margin;
-        border-bottom: 2px solid black;
-        font-size: 1.5rem;
+        border-bottom: 3px solid black;
+        font-size: 2rem;
         text-align: center;
     }
 }
 
 #alphabet{
+    width: 480px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 10px;
     div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: $width;
         height: $height;
         border: 1px solid black;
@@ -42,7 +52,6 @@ body{
         padding: 5px;
         margin: $margin;
         font-size: 2rem;
-        text-align: center;
         cursor: pointer;
     }
 }
