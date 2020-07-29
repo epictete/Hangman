@@ -1,0 +1,63 @@
+body {
+  width: 70%;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#canvas {
+  background-color: lightgrey;
+  margin: 20px;
+}
+
+#word {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px;
+}
+
+#word div {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border-bottom: 2px solid black;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#alphabet {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px;
+}
+
+#alphabet div {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 2rem;
+  text-align: center;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
