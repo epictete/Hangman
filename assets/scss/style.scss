@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-$width: 30px;
-$height: 30px;
+$width: 40px;
+$height: 40px;
 $margin: 5px;
 
-body{
+body {
     width: 75%;
     margin: auto;
     display: flex;
@@ -16,9 +16,14 @@ body{
 
 .buttons {
     margin-top: 20px;
+    button {
+        padding: 5px 10px;
+        margin: 0 10px;
+        font-size: 1.1rem;
+    }
 }
 
-#canvas{
+#canvas {
     background-color: lightgrey;
     margin-top: 20px;;
 }
@@ -39,23 +44,28 @@ body{
     }
 }
 
-#alphabet{
+#alphabet {
     width: 480px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
-    div{
+    margin: 20px 0;
+    button {
         display: flex;
         align-items: center;
         justify-content: center;
         width: $width;
         height: $height;
+        background-color: white;
         border: 1px solid black;
         border-radius: 5px;
         padding: 5px;
         margin: $margin;
         font-size: 2rem;
         cursor: pointer;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
     }
 }

@@ -12,7 +12,6 @@ function drawWin() {
     ctx.fillText('You WIN!', center, canvas.height - 70);
     ctx.fillText('Congratulations.', center, canvas.height - 40);
 }
-// drawWin();
 
 function drawGameOver() {
     ctx.font = '28px arial';
@@ -20,7 +19,6 @@ function drawGameOver() {
     ctx.fillText('Game Over!', center, canvas.height - 70);
     ctx.fillText('The word was : "' + game.target + '"', center, canvas.height - 40);
 }
-// drawGameOver();
 
 function draw() {
     switch (game.fails) {

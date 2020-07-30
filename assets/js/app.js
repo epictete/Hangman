@@ -67,28 +67,43 @@ let game = {
 }
 
 //Event listeners
-start.onclick = hangMan;
-reset.onclick = () => { document.location.reload(true) };
+start.onclick = () => {
+    hangMan();
+    start.disabled = true;
+};
+reset.onclick = () => {
+    document.location.reload(true);
+    start.disabled = false;
+};
+alphabet.onclick = checkLetter;
 
 //Functions
-function checkLetter(i) {
-    const letter = String.fromCharCode(i).toLocaleLowerCase();
-    if (game.target.includes(letter)) {
-        matchCount(letter);
-        guessUpdate(letter);
-        document.getElementById("letter-" + i).style.backgroundColor = 'green';
-        window.setTimeout(win, delay);
-    } else {
-        game.fails++;
-        draw();
-        document.getElementById("letter-" + i).style.backgroundColor = 'red';
-        window.setTimeout(gameOver, delay);
+function checkLetter(e) {
+    const letter = e.target.innerHTML.toLocaleLowerCase();
+    console.log(letter);
+    if (letter.length === 1) {
+        if (game.target.includes(letter)) {
+            matchCount(letter);
+            guessUpdate(letter);
+            e.target.style.backgroundColor = 'green';
+            e.target.disabled = true;
+            // win();
+            window.setTimeout(win, delay);
+        } else {
+            game.fails++;
+            draw();
+            e.target.style.backgroundColor = 'red';
+            e.target.disabled = true;
+            // gameOver();
+            window.setTimeout(gameOver, delay);
+        }
     }
 }
 
 function win() {
     if (game.score === game.target.length) {
-        drawWin();
+        alphabet.onclick = '';
+        alert('You WIN! Congratulations.');
     }
 }
 
@@ -96,7 +111,8 @@ function gameOver() {
     if (game.tries > 1) {
         game.tries--;
     } else {
-        drawGameOver();
+        alphabet.onclick = '';
+        alert(`Game Over! The word was: "${game.target}".`);
     }
 }
 
@@ -130,12 +146,11 @@ function wordGen() {
 
 function alphabetGen() {
     for (let i = 65; i <= 90; i++) {
-        const newDiv = document.createElement('div');
+        const newButton = document.createElement('button');
         const newContent = document.createTextNode(String.fromCharCode(i));
-        newDiv.setAttribute('id', 'letter-' + i)
-        newDiv.addEventListener("click", () => checkLetter(i));
-        newDiv.appendChild(newContent);
-        alphabet.appendChild(newDiv);
+        newButton.setAttribute('id', 'letter-' + i);
+        newButton.appendChild(newContent);
+        alphabet.appendChild(newButton);
     }
 }
 
