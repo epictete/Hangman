@@ -24,8 +24,11 @@ body {
 }
 
 #canvas {
+    display: none;
+    margin-top: 20px;
     background-color: lightgrey;
-    margin-top: 20px;;
+    border-radius: 5px;
+    box-shadow: 1px 1px 12px #555;
 }
 
 #word {

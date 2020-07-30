@@ -73,7 +73,6 @@ start.onclick = () => {
 };
 reset.onclick = () => {
     document.location.reload(true);
-    start.disabled = false;
 };
 alphabet.onclick = checkLetter;
 
@@ -87,14 +86,12 @@ function checkLetter(e) {
             guessUpdate(letter);
             e.target.style.backgroundColor = 'green';
             e.target.disabled = true;
-            // win();
             window.setTimeout(win, delay);
         } else {
             game.fails++;
             draw();
             e.target.style.backgroundColor = 'red';
             e.target.disabled = true;
-            // gameOver();
             window.setTimeout(gameOver, delay);
         }
     }
@@ -103,7 +100,7 @@ function checkLetter(e) {
 function win() {
     if (game.score === game.target.length) {
         alphabet.onclick = '';
-        alert('You WIN! Congratulations.');
+        alert('You WIN!\nCongratulations.\nClick RESET to play again :-)');
     }
 }
 
@@ -112,7 +109,7 @@ function gameOver() {
         game.tries--;
     } else {
         alphabet.onclick = '';
-        alert(`Game Over! The word was: "${game.target}".`);
+        alert('Game Over!\nThe word was: "' + game.target + '".\nClick RESET to play again :-)');
     }
 }
 
@@ -155,6 +152,7 @@ function alphabetGen() {
 }
 
 function hangMan() {
+    canvas.style.display = "block";
     randWord();
     wordGen();
     alphabetGen();

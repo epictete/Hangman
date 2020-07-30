@@ -29,8 +29,12 @@ body {
 }
 
 #canvas {
-  background-color: lightgrey;
+  display: none;
   margin-top: 20px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 12px #555;
+          box-shadow: 1px 1px 12px #555;
 }
 
 #word {
