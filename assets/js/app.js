@@ -1,7 +1,6 @@
-// const canvas = document.getElementById("canvas");
-// const ctx = canvas.getContext('2d');
-// let raf;
-
+// Constants
+const start = document.getElementById("start");
+const reset = document.getElementById("reset");
 const word = document.getElementById("word");
 const alphabet = document.getElementById("alphabet");
 const delay = 100;
@@ -58,7 +57,8 @@ const words = [
     'mall'
 ];
 
-var game = {
+//Variables
+let game = {
     score: 0,
     tries: 6,
     fails: 0,
@@ -66,6 +66,11 @@ var game = {
     target: ''
 }
 
+//Event listeners
+start.onclick = hangMan;
+reset.onclick = () => { document.location.reload(true) };
+
+//Functions
 function checkLetter(i) {
     const letter = String.fromCharCode(i).toLocaleLowerCase();
     if (game.target.includes(letter)) {
@@ -75,6 +80,7 @@ function checkLetter(i) {
         window.setTimeout(win, delay);
     } else {
         game.fails++;
+        draw();
         document.getElementById("letter-" + i).style.backgroundColor = 'red';
         window.setTimeout(gameOver, delay);
     }
@@ -82,8 +88,7 @@ function checkLetter(i) {
 
 function win() {
     if (game.score === game.target.length) {
-        alert('You WIN!');
-        document.location.reload(true);
+        drawWin();
     }
 }
 
@@ -91,8 +96,7 @@ function gameOver() {
     if (game.tries > 1) {
         game.tries--;
     } else {
-        alert('Game Over! The word was : "' + game.target + '"');
-        document.location.reload(true);
+        drawGameOver();
     }
 }
 
@@ -139,6 +143,6 @@ function hangMan() {
     randWord();
     wordGen();
     alphabetGen();
+    drawGallows();
     console.log(game.target);
 }
-hangMan();

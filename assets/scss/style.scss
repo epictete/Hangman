@@ -14,14 +14,18 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+.buttons {
+    margin-top: 20px;
+}
+
 #canvas{
     background-color: lightgrey;
-    margin: 20px;;
+    margin-top: 20px;;
 }
 
 #word {
     display: flex;
-    margin: 10px;
+    margin-top: 20px;
     div {
         display: flex;
         align-items: center;
@@ -40,7 +44,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 10px;
+    margin-top: 20px;
     div{
         display: flex;
         align-items: center;
