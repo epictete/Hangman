@@ -3,7 +3,6 @@ const start = document.getElementById("start");
 const reset = document.getElementById("reset");
 const word = document.getElementById("word");
 const alphabet = document.getElementById("alphabet");
-const delay = 100;
 const words = [
   "ability",
   "inspector",
@@ -67,30 +66,25 @@ let game = {
 };
 
 //Event listeners
-start.onclick = () => {
-  hangMan();
-  start.disabled = true;
-};
+start.onclick = () => hangMan();
 reset.onclick = () => document.location.reload(true);
 alphabet.onclick = checkLetter;
 
 //Functions
 function checkLetter(e) {
   const letter = e.target.innerHTML.toLocaleLowerCase();
-  console.log(letter);
+  e.target.disabled = true;
   if (letter.length === 1) {
     if (game.target.includes(letter)) {
       matchCount(letter);
       guessUpdate(letter);
       e.target.style.backgroundColor = "green";
-      e.target.disabled = true;
-      window.setTimeout(win, delay);
+      win();
     } else {
       game.fails++;
       draw();
       e.target.style.backgroundColor = "red";
-      e.target.disabled = true;
-      window.setTimeout(gameOver, delay);
+      gameOver();
     }
   }
 }
@@ -131,7 +125,7 @@ function matchCount(letter) {
   game.score = game.score + game.indexes.length;
 }
 
-function randWord() {
+async function randWord() {
   return (game.target = words[Math.floor(Math.random() * words.length)]);
 }
 
@@ -147,13 +141,13 @@ function alphabetGen() {
   for (let i = 65; i <= 90; i++) {
     const newButton = document.createElement("button");
     const newContent = document.createTextNode(String.fromCharCode(i));
-    newButton.setAttribute("id", "letter-" + i);
     newButton.appendChild(newContent);
     alphabet.appendChild(newButton);
   }
 }
 
 function hangMan() {
+  start.disabled = true;
   canvas.style.display = "block";
   randWord();
   wordGen();
