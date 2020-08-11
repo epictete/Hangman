@@ -9,44 +9,50 @@ let game = {
   score: 0,
   tries: 6,
   fails: 0,
-  letter: "",
+  currentLetter: "",
+  usedLetters: [],
   indexes: [],
   target: "",
 };
 
-//Event listeners
+//Game buttons
 start.onclick = hangMan;
 reset.onclick = () => document.location.reload(true);
-alphabet.onclick = clickHandler;
-document.onkeydown = keyDownHandler;
 
 //Functions
 function keyDownHandler() {
-  if (event.keyCode > 64 && event.keyCode < 91) {
-    game.letter = event.key;
-    document.getElementById(game.letter).disabled = true;
-    checkLetter();
+  if (
+    event.keyCode > 64 &&
+    event.keyCode < 91 &&
+    !game.usedLetters.includes(event.key)
+  ) {
+    game.currentLetter = event.key.toLocaleLowerCase();
+    game.usedLetters.push(event.key.toLocaleLowerCase());
+    document.getElementById(game.currentLetter).disabled = true;
+    checkcurrentLetter();
   }
 }
 
 function clickHandler() {
-  game.letter = event.target.innerHTML.toLocaleLowerCase();
-  if (game.letter.length === 1) {
+  let temp = event.target.innerHTML.toLocaleLowerCase();
+  if (temp.length === 1) {
+    game.currentLetter = temp;
+    game.usedLetters.push(temp);
     event.target.disabled = true;
-    checkLetter();
+    checkcurrentLetter();
   }
 }
 
-function checkLetter() {
-  if (game.target.includes(game.letter)) {
+function checkcurrentLetter() {
+  if (game.target.includes(game.currentLetter)) {
+    document.getElementById(game.currentLetter).style.backgroundColor = "green";
     matchCount();
     guessUpdate();
-    document.getElementById(game.letter).style.backgroundColor = "green";
     win();
   } else {
     game.fails++;
+    document.getElementById(game.currentLetter).style.backgroundColor = "red";
     draw();
-    document.getElementById(game.letter).style.backgroundColor = "red";
     gameOver();
   }
 }
@@ -78,16 +84,16 @@ function removeListeners() {
 
 function guessUpdate() {
   for (index of game.indexes) {
-    document.getElementById("word-" + index).innerHTML = game.letter;
+    document.getElementById("word-" + index).innerHTML = game.currentLetter;
   }
   game.indexes = [];
 }
 
 function matchCount() {
-  let pos = game.target.indexOf(game.letter);
+  let pos = game.target.indexOf(game.currentLetter);
   while (pos != -1) {
     game.indexes.push(pos);
-    pos = game.target.indexOf(game.letter, pos + 1);
+    pos = game.target.indexOf(game.currentLetter, pos + 1);
   }
   game.score = game.score + game.indexes.length;
 }
@@ -122,5 +128,7 @@ function hangMan() {
   wordGen();
   alphabetGen();
   drawGallows();
+  document.onkeydown = keyDownHandler;
+  alphabet.onclick = clickHandler;
   console.log(game.target);
 }

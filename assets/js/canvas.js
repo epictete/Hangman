@@ -57,7 +57,6 @@ function drawHead() {
 }
 
 function drawBody() {
-  ctx.lineWidth = 5;
   ctx.beginPath();
   ctx.moveTo(center, 125);
   ctx.lineTo(center, 220);
