@@ -15,7 +15,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .buttons {
@@ -30,11 +30,9 @@ body {
 
 #canvas {
   display: none;
-  margin-top: 20px;
+  margin-top: 40px;
   background-color: lightgrey;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 12px #555;
-          box-shadow: 1px 1px 12px #555;
 }
 
 #word {
@@ -100,5 +98,22 @@ body {
   outline: none;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.gray-glow {
+  -webkit-box-shadow: 0 0 14px #25292b;
+          box-shadow: 0 0 14px #25292b;
+}
+
+.green-glow {
+  border: 2px solid #19ff57;
+  -webkit-box-shadow: 0 0 14px #00b330;
+          box-shadow: 0 0 14px #00b330;
+}
+
+.red-glow {
+  border: 2px solid #ff0007;
+  -webkit-box-shadow: 0 0 14px #b30005;
+          box-shadow: 0 0 14px #b30005;
 }
 /*# sourceMappingURL=style.css.map */

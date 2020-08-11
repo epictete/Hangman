@@ -1,74 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 $width: 40px;
 $height: 40px;
 $margin: 5px;
+$shadow: 0 0 14px;
 
 body {
-    width: 75%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: 'Roboto', sans-serif;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
 }
 
 .buttons {
-    margin-top: 20px;
-    button {
-        padding: 5px 10px;
-        margin: 0 10px;
-        font-size: 1.1rem;
-    }
+  margin-top: 20px;
+  button {
+    padding: 5px 10px;
+    margin: 0 10px;
+    font-size: 1.1rem;
+  }
 }
 
 #canvas {
-    display: none;
-    margin-top: 20px;
-    background-color: lightgrey;
-    border-radius: 5px;
-    box-shadow: 1px 1px 12px #555;
+  display: none;
+  margin-top: 40px;
+  background-color: lightgrey;
+  border-radius: 5px;
 }
 
 #word {
+  display: flex;
+  margin-top: 20px;
+  div {
     display: flex;
-    margin-top: 20px;
-    div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: $width;
-        height: $height;
-        margin: $margin;
-        border-bottom: 3px solid black;
-        font-size: 2rem;
-        text-align: center;
-    }
+    align-items: center;
+    justify-content: center;
+    width: $width;
+    height: $height;
+    margin: $margin;
+    border-bottom: 3px solid black;
+    font-size: 2rem;
+    text-align: center;
+  }
 }
 
 #alphabet {
-    width: 480px;
+  width: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+  button {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    margin: 20px 0;
-    button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: $width;
-        height: $height;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 5px;
-        padding: 5px;
-        margin: $margin;
-        font-size: 2rem;
-        cursor: pointer;
-        &:focus {
-            outline: none;
-            box-shadow: none;
-        }
+    width: $width;
+    height: $height;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: $margin;
+    font-size: 2rem;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
+  }
+}
+
+.gray-glow {
+  box-shadow: $shadow #25292b;
+}
+
+.green-glow {
+  border: 2px solid #19ff57;
+  box-shadow: $shadow #00b330;
+}
+
+.red-glow {
+  border: 2px solid #ff0007;
+  box-shadow: $shadow #b30005;
 }
