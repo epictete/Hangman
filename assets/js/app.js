@@ -3,6 +3,9 @@ const start = document.getElementById("start");
 const reset = document.getElementById("reset");
 const word = document.getElementById("word");
 const alphabet = document.getElementById("alphabet");
+const text = document.getElementById("text");
+const instructions =
+  "Use your <i>keyboard</i> or <i>click</i> on the letters below.";
 
 //Variables
 let game = {
@@ -123,6 +126,7 @@ function alphabetGen() {
 function hangMan() {
   start.disabled = true;
   start.blur();
+  text.innerHTML = instructions;
   canvas.style.display = "block";
   randWord();
   wordGen();
